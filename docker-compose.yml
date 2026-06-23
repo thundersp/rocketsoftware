@@ -1,0 +1,69 @@
+version: "3.8"
+
+services:
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: buzzmeet-db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: buzzmeet
+      MYSQL_USER: buzzmeet
+      MYSQL_PASSWORD: buzzmeet123
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - buzzmeet-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+      interval: 10s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: buzzmeet-backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/pom.xml:/app/pom.xml
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/buzzmeet
+      SPRING_DATASOURCE_USERNAME: buzzmeet
+      SPRING_DATASOURCE_PASSWORD: buzzmeet123
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - buzzmeet-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: buzzmeet-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+      - ./frontend/index.html:/app/index.html
+    environment:
+      VITE_API_URL: http://localhost:8080
+    depends_on:
+      - backend
+    networks:
+      - buzzmeet-network
+
+volumes:
+  db_data:
+
+networks:
+  buzzmeet-network:
+    driver: bridge

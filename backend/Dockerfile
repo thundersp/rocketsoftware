@@ -1,7 +1,13 @@
-# /ROCKETSOFTWARE/backend/Dockerfile.dev
 FROM maven:3.9-eclipse-temurin-25
 
 WORKDIR /app
 
-# Run the Spring Boot application using the Maven plugin for live-reloading
+# Copy pom.xml and source code
+COPY pom.xml .
+COPY src ./src
+
+# Expose Spring Boot port
+EXPOSE 8080
+
+# Run Spring Boot with DevTools for hot reload
 CMD ["mvn", "spring-boot:run"]
