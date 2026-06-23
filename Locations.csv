@@ -1,0 +1,43 @@
+_id,phone,country,city,
+1,+81 664 654 5882,Japan,Tokyo,
+2,+55 886 863 6908,Brazil,São Paulo,
+3,+1 334 275 3541,United States,Dallas,
+4,+27 591 268 2006,South Africa,Johannesburg,
+5,+49 531 687 9657,Germany,Berlin,
+,,,,
+,,,,
+location,building,room,type,seats
+Tokyo,21-A,2-101,conference,12
+Tokyo,21-A,2-102,conference,12
+Tokyo,32-A,4-220,conference,8
+Tokyo,32-B,1-100,auditorium,120
+Tokyo,32-B,1-110,video,24
+Tokyo,21-A,3-100,server,
+Tokyo,32-B,1-140,server,
+,,,,
+,,,,
+São Paulo,Travessa Santo Ivo 256,1234,conference,18
+São Paulo,Travessa Santo Ivo 256,1254,conference,8
+São Paulo,Travessa Santo Ivo 256,1012,video,12
+São Paulo,Travessa Santo Ivo 256,1000,server,
+,,,,
+,,,,
+Dallas,1324 Ross ,212,conference,24
+Dallas,1324 Ross ,312,conference,12
+Dallas,1324 Ross ,412,auditorium,220
+Dallas,1324 Ross ,512,video,32
+Dallas,1326 Ross ,330,conference,12
+Dallas,1326 Ross ,340,video,32
+Dallas,1324 Ross ,100,server,
+Dallas,1326 Ross ,100,server,
+,,,,
+,,,,
+Johannesburg,3 South St Lorentzville,1-21,conference,12
+Johannesburg,3 South St Lorentzville,2-21,video,12
+Johannesburg,3 South St Lorentzville,1-100,server, 
+,,,,
+,,,,
+Berlin,197 Roedernallee,B200,conference,12
+Berlin,197 Roedernallee,B212,conference,8
+Berlin,197 Roedernallee,B234,video,8
+Berlin,197 Roedernallee,A100,server,
