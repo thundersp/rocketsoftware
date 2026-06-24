@@ -6,8 +6,8 @@ ENV MYSQL_DATABASE=buzzmeet
 ENV MYSQL_USER=buzzmeet
 ENV MYSQL_PASSWORD=buzzmeet123
 
-# Copy initialization script
-COPY Employee.sql /docker-entrypoint-initdb.d/
+# Copy initialization scripts
+COPY *.sql /docker-entrypoint-initdb.d/
 
 # Expose MySQL port
 EXPOSE 3306
