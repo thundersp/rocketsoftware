@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -u
 set -o pipefail
@@ -16,10 +16,10 @@ TEST_TIME_ZONE_ID="${TEST_TIME_ZONE_ID:-3}"
 TEST_ORGANIZER_ID="${TEST_ORGANIZER_ID:-31}"
 TEST_EMPLOYEE_ID="${TEST_EMPLOYEE_ID:-14}"
 TEST_APPROVER_ID="${TEST_APPROVER_ID:-58}"
-TEST_ROOM_ID="${TEST_ROOM_ID:-999999}"
-TEST_ASSIGNMENT_ID="${TEST_ASSIGNMENT_ID:-999999}"
-TEST_ROOM_ASSIGNMENT_ID="${TEST_ROOM_ASSIGNMENT_ID:-999999}"
-TEST_VIDEO_RESERVATION_ID="${TEST_VIDEO_RESERVATION_ID:-999999}"
+TEST_ROOM_ID="${TEST_ROOM_ID:-103}"
+TEST_ASSIGNMENT_ID="${TEST_ASSIGNMENT_ID:-1001}"
+TEST_ROOM_ASSIGNMENT_ID="${TEST_ROOM_ASSIGNMENT_ID:-2001}"
+TEST_VIDEO_RESERVATION_ID="${TEST_VIDEO_RESERVATION_ID:-4001}"
 
 usage() {
   cat <<USAGE
@@ -365,7 +365,7 @@ JSON
   ],
   "videoReservations": [
     {
-      "meetingAssignmentId": ${TEST_ASSIGNMENT_ID},
+      "meetingAssignmentId": ${TEST_ROOM_ASSIGNMENT_ID},
       "locationId": ${TEST_LOCATION_ID},
       "timeZoneId": ${TEST_TIME_ZONE_ID},
       "videoTitle": "API Validation Bridge ${RUN_ID}",
@@ -400,7 +400,7 @@ JSON
   ],
   "videoReservations": [
     {
-      "meetingAssignmentId": ${TEST_ASSIGNMENT_ID},
+      "meetingAssignmentId": ${TEST_ROOM_ASSIGNMENT_ID},
       "locationId": ${TEST_LOCATION_ID},
       "timeZoneId": ${TEST_TIME_ZONE_ID},
       "videoTitle": "API Validation Bridge Updated ${RUN_ID}",
@@ -431,7 +431,7 @@ JSON
 
   video_reservation_body="$(cat <<JSON
 {
-  "meetingAssignmentId": ${TEST_ASSIGNMENT_ID},
+  "meetingAssignmentId": ${TEST_ROOM_ASSIGNMENT_ID},
   "locationId": ${TEST_LOCATION_ID},
   "timeZoneId": ${TEST_TIME_ZONE_ID},
   "videoTitle": "API Validation Video Reservation ${RUN_ID}",
