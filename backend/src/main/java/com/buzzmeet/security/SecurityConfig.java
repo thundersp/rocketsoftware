@@ -38,7 +38,16 @@ public class SecurityConfig {
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.exceptionHandling(ex -> ex.authenticationEntryPoint(restAuthenticationEntryPoint))
 			.authorizeHttpRequests(auth -> auth
-				.requestMatchers("/api/auth/login", "/error").permitAll()
+				.requestMatchers(
+					"/api/auth/login",
+					"/api/auth/signup",
+					"/error",
+					"/swagger-ui/**",
+					"/swagger-ui.html",
+					"/v3/api-docs/**",
+					"/v3/api-docs",
+					"/webjars/**"
+				).permitAll()
 				.anyRequest().authenticated())
 			.authenticationProvider(authenticationProvider())
 			.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

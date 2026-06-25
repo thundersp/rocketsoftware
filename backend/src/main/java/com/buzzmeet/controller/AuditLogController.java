@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ public class AuditLogController {
         this.auditLogService = auditLogService;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER','APPROVER')")
     @GetMapping("/audit-logs")
     public ResponseEntity<List<Map<String, Object>>> getAuditLogs(
             @RequestParam(required = false) String entityType,

@@ -1,0 +1,270 @@
+.landing {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* Nav */
+.landing-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.landing-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.brand-icon {
+  font-size: 1.8rem;
+}
+
+.landing-nav-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Hero */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  gap: 3rem;
+}
+
+.hero-content {
+  flex: 1;
+  max-width: 560px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+
+.hero-content .highlight {
+  color: #3b82f6;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.hero-visual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar-preview {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  width: 340px;
+}
+
+.cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1e293b;
+  margin-bottom: 1rem;
+}
+
+.cal-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot.green { background: #22c55e; }
+.dot.blue { background: #3b82f6; }
+.dot.orange { background: #f59e0b; }
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  text-align: center;
+}
+
+.cal-day-name {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #94a3b8;
+  padding: 4px;
+}
+
+.cal-day {
+  font-size: 0.85rem;
+  padding: 6px;
+  border-radius: 6px;
+  color: #475569;
+}
+
+.cal-day.has-event {
+  background: #dbeafe;
+  color: #2563eb;
+  font-weight: 600;
+}
+
+/* Features */
+.features-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2rem;
+  color: #0f172a;
+  margin-bottom: 2.5rem;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: left;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Roles */
+.roles-section {
+  background: #1e293b;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.roles-section h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.role-card {
+  background: #334155;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: left;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.role-badge.employee { background: #dbeafe; color: #1d4ed8; }
+.role-badge.manager { background: #fef3c7; color: #b45309; }
+.role-badge.admin { background: #fce7f3; color: #be185d; }
+
+.role-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.role-card li {
+  color: #cbd5e1;
+  padding: 0.35rem 0;
+  font-size: 0.9rem;
+}
+
+.role-card li::before {
+  content: '✓ ';
+  color: #22c55e;
+}
+
+/* Footer */
+.landing-footer {
+  text-align: center;
+  padding: 2rem;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  .hero-content h1 { font-size: 2rem; }
+  .hero-actions { justify-content: center; }
+  .hero-visual { margin-top: 2rem; }
+}

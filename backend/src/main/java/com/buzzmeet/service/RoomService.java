@@ -14,9 +14,11 @@ import com.buzzmeet.exception.ResourceNotFoundException;
 public class RoomService {
 
     private final NamedParameterJdbcTemplate jdbc;
+    private final AuditLogWriter auditLogWriter;
 
-    public RoomService(NamedParameterJdbcTemplate jdbc) {
+    public RoomService(NamedParameterJdbcTemplate jdbc, AuditLogWriter auditLogWriter) {
         this.jdbc = jdbc;
+        this.auditLogWriter = auditLogWriter;
     }
 
     public List<Map<String, Object>> getRooms(Integer locationId, Integer buildingId,
@@ -79,6 +81,7 @@ public class RoomService {
                 + "VALUES (:roomId, :buildingId, :roomTypeId, :roomCode, :roomName, :capacity, :floor, :isVideoRoom, :dialInInfo, :status, :notes)";
         MapSqlParameterSource params = buildRoomParameters(roomId, request);
         jdbc.update(sql, params);
+        auditLogWriter.log("ROOM_CREATE", "ROOM", roomId, null, getRoom(roomId));
     }
 
     public void updateRoom(Integer roomId, Map<String, Object> request) {
@@ -88,15 +91,18 @@ public class RoomService {
         String sql = "UPDATE Rooms SET BuildingId = :buildingId, RoomTypeId = :roomTypeId, RoomCode = :roomCode, RoomName = :roomName, Capacity = :capacity, Floor = :floor, IsVideoRoom = :isVideoRoom, DialInInfo = :dialInInfo, Status = :status, Notes = :notes WHERE RoomId = :roomId";
         MapSqlParameterSource params = buildRoomParameters(roomId, merged);
         jdbc.update(sql, params);
+        auditLogWriter.log("ROOM_UPDATE", "ROOM", roomId, existing, getRoom(roomId));
     }
 
     public void deleteRoom(Integer roomId) {
+        Map<String, Object> oldValues = getRoom(roomId);
         String sql = "DELETE FROM Rooms WHERE RoomId = :roomId";
         MapSqlParameterSource params = new MapSqlParameterSource("roomId", roomId);
         int updated = jdbc.update(sql, params);
         if (updated == 0) {
             throw new ResourceNotFoundException("Room not found: " + roomId);
         }
+        auditLogWriter.log("ROOM_DELETE", "ROOM", roomId, oldValues, null);
     }
 
     public List<Map<String, Object>> getRoomAvailability(Integer roomId, String startUtc, String endUtc) {

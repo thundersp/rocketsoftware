@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.buzzmeet.dto.request.AuthLoginRequest;
+import com.buzzmeet.dto.request.AuthSignupRequest;
 import com.buzzmeet.dto.response.AuthTokenResponse;
 import com.buzzmeet.dto.response.CurrentUserResponse;
 import com.buzzmeet.security.ApplicationUser;
@@ -29,6 +30,11 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<AuthTokenResponse> login(@Valid @RequestBody AuthLoginRequest request) {
 		return ResponseEntity.ok(authService.login(request));
+	}
+
+	@PostMapping("/signup")
+	public ResponseEntity<AuthTokenResponse> signup(@Valid @RequestBody AuthSignupRequest request) {
+		return ResponseEntity.ok(authService.signup(request));
 	}
 
 	@GetMapping("/me")

@@ -26,6 +26,12 @@ public class GlobalExceptionHandler {
 		return buildResponse(HttpStatus.BAD_REQUEST, "Validation failed", request.getRequestURI(), details);
 	}
 
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<ApiErrorResponse> handleIllegalArgument(IllegalArgumentException exception,
+			HttpServletRequest request) {
+		return buildResponse(HttpStatus.BAD_REQUEST, exception.getMessage(), request.getRequestURI(), List.of());
+	}
+
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<ApiErrorResponse> handleNotFound(ResourceNotFoundException exception,
 			HttpServletRequest request) {

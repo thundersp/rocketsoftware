@@ -1,0 +1,82 @@
+═══════════════════════════════════════════════════════════════════════
+BuzzMeet API Validation
+Base URL : http://localhost:8080
+Mode     : read-only
+Run ID   : 20260625-120825
+Log      : ./api-validation-logs/api-validation-20260625-120825.summary
+═══════════════════════════════════════════════════════════════════════
+
+──── Authentication — Login ────
+PASS  POST    /api/auth/login                                                         status=200  expected=200           POST /api/auth/login
+       Token acquired successfully.
+
+──── Auth — Current User ────
+PASS  GET     /api/auth/me                                                            status=200  expected=200           GET /api/auth/me
+
+──── Lookup — Reference Data ────
+PASS  GET     /api/locations                                                          status=200  expected=200           GET /api/locations
+PASS  GET     /api/buildings                                                          status=200  expected=200           GET /api/buildings (all)
+PASS  GET     /api/buildings?locationId=3                                             status=200  expected=200           GET /api/buildings?locationId
+PASS  GET     /api/room-types                                                         status=200  expected=200           GET /api/room-types
+PASS  GET     /api/time-zones                                                         status=200  expected=200           GET /api/time-zones
+PASS  GET     /api/employees                                                          status=200  expected=200           GET /api/employees (all)
+PASS  GET     /api/employees?locationId=3                                             status=200  expected=200           GET /api/employees?locationId
+PASS  GET     /api/employees?title=Manager                                            status=200  expected=200           GET /api/employees?title
+PASS  GET     /api/employees?locationId=3&title=Manager                               status=200  expected=200           GET /api/employees?locationId&title
+
+──── Rooms — Read ────
+PASS  GET     /api/rooms                                                              status=200  expected=200           GET /api/rooms (all)
+PASS  GET     /api/rooms?locationId=3                                                 status=200  expected=200           GET /api/rooms?locationId
+PASS  GET     /api/rooms?buildingId=1                                                 status=200  expected=200           GET /api/rooms?buildingId
+PASS  GET     /api/rooms?roomTypeId=1                                                 status=200  expected=200           GET /api/rooms?roomTypeId
+PASS  GET     /api/rooms?status=ACTIVE                                                status=200  expected=200           GET /api/rooms?status
+PASS  GET     /api/rooms?isVideoRoom=true                                             status=200  expected=200           GET /api/rooms?isVideoRoom
+PASS  GET     /api/rooms?capacity=10                                                  status=200  expected=200           GET /api/rooms?capacity
+PASS  GET     /api/rooms/103                                                          status=200  expected=200           GET /api/rooms/{roomId}
+PASS  GET     /api/rooms/103/availability?startUtc=2026-07-01T13:00:00Z&endUtc=2026-07-01T14:30:00Z  status=200  expected=200           GET /api/rooms/{roomId}/availability
+
+──── Assignments — Read ────
+PASS  GET     /api/assignments                                                        status=200  expected=200           GET /api/assignments (all)
+PASS  GET     /api/assignments?organizerId=46                                         status=200  expected=200           GET /api/assignments?organizerId
+PASS  GET     /api/assignments?participantEmployeeId=46                               status=200  expected=200           GET /api/assignments?participantEmployeeId
+PASS  GET     /api/assignments?status=CONFIRMED                                       status=200  expected=200           GET /api/assignments?status
+PASS  GET     /api/assignments?locationId=3                                           status=200  expected=200           GET /api/assignments?locationId
+PASS  GET     /api/assignments?roomId=103                                             status=200  expected=200           GET /api/assignments?roomId
+PASS  GET     /api/assignments?fromUtc=2026-07-01T00:00:00Z&toUtc=2026-07-31T23:59:59Z  status=200  expected=200           GET /api/assignments?fromUtc&toUtc
+PASS  GET     /api/assignments?priority=NORMAL                                        status=200  expected=200           GET /api/assignments?priority
+PASS  GET     /api/assignments/1001                                                   status=200  expected=200           GET /api/assignments/{assignmentId}
+
+──── Room Assignments — Read ────
+PASS  GET     /api/room-assignments                                                   status=200  expected=200           GET /api/room-assignments (all)
+PASS  GET     /api/room-assignments?roomId=103                                        status=200  expected=200           GET /api/room-assignments?roomId
+PASS  GET     /api/room-assignments?locationId=3                                      status=200  expected=200           GET /api/room-assignments?locationId
+PASS  GET     /api/room-assignments?status=CONFIRMED                                  status=200  expected=200           GET /api/room-assignments?status
+PASS  GET     /api/room-assignments?fromUtc=2026-07-01T00:00:00Z&toUtc=2026-07-31T23:59:59Z  status=200  expected=200           GET /api/room-assignments?fromUtc&toUtc
+PASS  GET     /api/assignments/1001/room-assignments                                  status=200  expected=200           GET /api/assignments/{id}/room-assignments
+
+──── Video Reservations — Read ────
+PASS  GET     /api/assignments/1001/video-reservations                                status=200  expected=200           GET /api/assignments/{id}/video-reservations
+PASS  GET     /api/video-reservations/4001                                            status=404  expected=200,404       GET /api/video-reservations/{videoReservationId}
+
+──── Participants — Read ────
+PASS  GET     /api/assignments/1001/participants                                      status=200  expected=200           GET /api/assignments/{id}/participants
+
+──── Notifications ────
+PASS  GET     /api/notifications                                                      status=200  expected=200           GET /api/notifications (all)
+PASS  GET     /api/notifications?employeeId=46                                        status=200  expected=200           GET /api/notifications?employeeId
+
+──── Audit Logs ────
+PASS  GET     /api/audit-logs                                                         status=200  expected=200,403       GET /api/audit-logs (all)
+PASS  GET     /api/audit-logs?entityType=ASSIGNMENT                                   status=200  expected=200,403       GET /api/audit-logs?entityType
+PASS  GET     /api/audit-logs?entityType=ASSIGNMENT&entityId=1001                     status=200  expected=200,403       GET /api/audit-logs?entityType&entityId
+
+──── Admin — Read (200 or 403 if insufficient role) ────
+PASS  GET     /api/admin/users                                                        status=200  expected=200,403       GET /api/admin/users
+PASS  GET     /api/admin/users?activeOnly=true                                        status=200  expected=200,403       GET /api/admin/users?activeOnly=true
+PASS  GET     /api/admin/users?roleName=MANAGER                                       status=200  expected=200,403       GET /api/admin/users?roleName
+PASS  GET     /api/admin/equipment                                                    status=200  expected=200,403       GET /api/admin/equipment
+PASS  GET     /api/admin/equipment?status=ACTIVE                                      status=200  expected=200,403       GET /api/admin/equipment?status
+
+═══════════════════════════════════════════════════════════════════════
+Results:  TOTAL=48  PASS=48  FAIL=0  SKIP=0
+═══════════════════════════════════════════════════════════════════════

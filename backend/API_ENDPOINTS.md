@@ -6,8 +6,8 @@ This document lists the backend API endpoints for the BuzzMeet meeting scheduler
 
 It is split into two sections:
 
-- Implemented now: endpoints already scaffolded in the Spring Boot backend
-- Planned next: endpoints that are part of the agreed API contract and should be implemented in the next slices
+- Implemented now: endpoints currently available in the Spring Boot backend
+- Future enhancements: additional API improvements that may be added in later slices
 
 Base URL during local development:
 
@@ -320,9 +320,9 @@ Use this for:
 
 ---
 
-# Planned Next
+# Implemented In Latest Slice
 
-The following endpoints are part of the target API design for the full system.
+The following endpoints were previously planned and are now implemented in the backend.
 
 ## 3. Room Management Endpoints
 
@@ -515,6 +515,16 @@ Recommended scope:
 - participants
 - room links
 - video reservation links
+
+### DELETE /api/assignments/{assignmentId}
+
+Purpose:
+
+- delete an assignment and linked assignment records when allowed
+
+Guard:
+
+- reject deletion if replacement assignments reference this assignment via `PreviousAssignmentId`
 
 ---
 
@@ -766,13 +776,34 @@ Implemented in backend now:
 - `GET /api/room-types`
 - `GET /api/time-zones`
 - `GET /api/employees`
+- `GET /api/rooms`
+- `GET /api/rooms/{roomId}`
+- `POST /api/rooms`
+- `PUT /api/rooms/{roomId}`
+- `DELETE /api/rooms/{roomId}`
+- `GET /api/rooms/{roomId}/availability`
+- `POST /api/assignments`
+- `GET /api/assignments`
+- `GET /api/assignments/{assignmentId}`
+- `PUT /api/assignments/{assignmentId}`
+- `DELETE /api/assignments/{assignmentId}`
+- `GET /api/room-assignments`
+- `GET /api/assignments/{assignmentId}/room-assignments`
+- `POST /api/assignments/{assignmentId}/room-assignments`
+- `PUT /api/room-assignments/{meetingAssignmentId}`
+- `DELETE /api/assignments/{assignmentId}/room-assignments/{meetingAssignmentId}`
+- `GET /api/assignments/{assignmentId}/video-reservations`
+- `POST /api/assignments/{assignmentId}/video-reservations`
+- `GET /api/video-reservations/{videoReservationId}`
+- `PUT /api/video-reservations/{videoReservationId}`
+- `DELETE /api/video-reservations/{videoReservationId}`
+- `POST /api/assignments/{assignmentId}/cancel`
+- `POST /api/assignments/{assignmentId}/override`
+- `GET /api/notifications`
+- `GET /api/audit-logs`
 
-Planned next implementation:
+Future enhancements:
 
-- room CRUD
-- room availability
-- assignment CRUD and detail views
-- room assignment views and management
-- video reservation views and management
-- manager cancel and override flows
-- notifications and audit log read APIs
+- stronger request/response DTO typing for map-based endpoints
+- endpoint-level examples for newly added assignment and reservation responses
+- expanded rule/error documentation for override and cancellation edge cases

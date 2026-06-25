@@ -239,7 +239,8 @@ INSERT INTO Roles (RoleId, RoleName, Description) VALUES
     (1, 'ADMIN', 'Administrative access for scheduler configuration'),
     (2, 'ORGANIZER', 'Can create and manage meetings'),
     (3, 'APPROVER', 'Approves restricted rooms and meeting exceptions'),
-    (4, 'EMPLOYEE', 'Standard employee access to view and respond to meetings');
+    (4, 'EMPLOYEE', 'Standard employee access to view and respond to meetings'),
+    (5, 'MANAGER', 'Can override conflicts and manage meetings across teams');
 
 INSERT INTO User_Credentials (
     CredentialId,
@@ -266,10 +267,12 @@ INSERT INTO Employee_Roles (EmployeeId, RoleId, AssignedAt, IsActive) VALUES
     (14, 2, '2026-01-12 09:20:00', 'Y'),
     (31, 1, '2026-01-15 08:05:00', 'Y'),
     (31, 2, '2026-01-15 08:05:00', 'Y'),
+    (31, 5, '2026-01-15 08:05:00', 'Y'),
     (46, 4, '2026-02-01 10:35:00', 'Y'),
     (58, 3, '2026-02-10 11:05:00', 'Y'),
     (160, 1, '2026-03-02 12:05:00', 'Y'),
-    (160, 3, '2026-03-02 12:05:00', 'Y');
+    (160, 3, '2026-03-02 12:05:00', 'Y'),
+    (160, 5, '2026-03-02 12:05:00', 'Y');
 
 INSERT INTO Buildings (BuildingId, LocationId, BuildingName, AddressLine1, AddressLine2, Status) VALUES
     (1, 1, 'Tokyo Innovation Center', '384-1106 Yahara', 'Nerima-ku', 'ACTIVE'),
